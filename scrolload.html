@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Scroll Load Ajax</title>
+</head>
+<body>
+
+		<ul class="items">
+		   <li>content</li>
+		   <li>content</li>
+		</ul>
+		<div id="lastPostsLoader"></div>
+
+
+		<script type="text/javascript" src="http://www.jquery4u.com/demos/infinite-scrolling-demo5/jquery1.6.2.js"></script>
+
+		<script type="text/javascript">
+		$(document).ready(function(){
+		    function lastAddedLiveFunc()
+		    {
+		        $('div#lastPostsLoader').html('<img src="http://www.jquery4u.com/demos/infinite-scrolling-demo5/bigLoader.gif"/>');
+		 
+		        $.get("ajax.html", function(data){
+		            if (data != "") {
+		                //console.log('add data..');
+		                $(".items").append(data);
+		            }
+		            $('div#lastPostsLoader').empty();
+		        });
+		    };
+		 
+		    //lastAddedLiveFunc();
+		    $(window).scroll(function(){
+		 
+		        var wintop = $(window).scrollTop(), docheight = $(document).height(), winheight = $(window).height();
+		        var  scrolltrigger = 0.95;
+		 
+		        if  ((wintop/(docheight-winheight)) > scrolltrigger) {
+		         //console.log('scroll bottom');
+		         lastAddedLiveFunc();
+		        }
+		    });
+		});
+		</script>
+
+</body>
+</html>
